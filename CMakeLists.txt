@@ -7,6 +7,7 @@ include(MyGlobalImports.cmake)
 include(MySpecial.cmake)
 
 project ("Dev_CStrobe")
+my_init_global_import_variables()
 
 my_special1()
 
