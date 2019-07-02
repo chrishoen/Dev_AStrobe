@@ -13,6 +13,7 @@ my_init_global_import_variables()
 my_special1()
 
 add_subdirectory ("CommonLib")
+add_subdirectory ("cstrobe")
 add_subdirectory ("Test")
 return()
 

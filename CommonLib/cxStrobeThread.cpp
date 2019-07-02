@@ -35,7 +35,7 @@ StrobeThread::StrobeThread()
 
    // Set timer period.
    BaseClass::mTimerPeriod = gStrobeParms.mTimerThreadPeriod;
-   mTimeMarker.initialize(100);
+   mTimeMarker.initialize(gStrobeParms.mTimeMarkerSize);
 
    // Members
    mTPFlag = false;

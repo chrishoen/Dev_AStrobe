@@ -35,8 +35,11 @@ void StrobeParms::reset()
    BaseClass::reset();
    BaseClass::setFilePath("./files/Strobe_Parms.txt");
 
-   mTimerThreadPeriod = 0;
+   mStrobeEnable = false;
    mShowCode = 0;
+
+   mTimerThreadPeriod = 0;
+   mTimeMarkerSize = 0;
 }
 
 //******************************************************************************
@@ -51,11 +54,14 @@ void StrobeParms::show()
    printf("StrobeParms************************************************ %s\n", mTargetSection);
 
    printf("\n");
-   printf("ShowCode                   %-10d\n", mShowCode);
-   printf("TimerThreadPeriod          %-10d\n", mTimerThreadPeriod);
-
+   printf("StrobeEnable                %-10s\n", my_string_from_bool(mStrobeEnable));
+   printf("ShowCode                    %-10d\n", mShowCode);
    printf("\n");
-   printf("StrobePrintLevel           %-10s\n", mStrobePrintLevel.asString(tBuffer));
+   printf("StrobePrintLevel            %-10s\n", mStrobePrintLevel.asString(tBuffer));
+   printf("\n");
+   printf("TimerThreadPeriod           %-10d\n", mTimerThreadPeriod);
+   printf("TimeMarkerSize              %-10d\n", mTimeMarkerSize);
+
 }
 
 //******************************************************************************
@@ -69,10 +75,12 @@ void StrobeParms::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
+   if (aCmd->isCmd("StrobeEnable"))             mStrobeEnable = aCmd->argBool(1);
    if (aCmd->isCmd("ShowCode"))                 mShowCode = aCmd->argInt(1);
-   if (aCmd->isCmd("TimerThreadPeriod"))        mTimerThreadPeriod = aCmd->argInt(1);
-
    if (aCmd->isCmd("StrobePrintLevel"))         mStrobePrintLevel.readArgs(aCmd);
+
+   if (aCmd->isCmd("TimerThreadPeriod"))        mTimerThreadPeriod = aCmd->argInt(1);
+   if (aCmd->isCmd("TimeMarkerSize"))           mTimeMarkerSize = aCmd->argInt(1);
 }
 
 //******************************************************************************
