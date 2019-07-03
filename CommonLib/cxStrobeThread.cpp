@@ -25,6 +25,7 @@ namespace CX
 //******************************************************************************
 
 StrobeThread::StrobeThread()
+   : mOutGPIO(60)
 {
    // Set base class variables.
    BaseClass::setThreadName("Strobe");
@@ -39,7 +40,7 @@ StrobeThread::StrobeThread()
 
    // Members
    mTPFlag = false;
-   mTestCode = 1;
+   mTestCode = 3;
    mTestCount = 0;
 }
 
@@ -49,6 +50,9 @@ StrobeThread::StrobeThread()
 
 void StrobeThread::threadInitFunction()
 {
+// mOutGPIO.streamOpen();
+   mOutGPIO.setDirection(OUTPUT);
+
    if (mTestCode !=3) return;
 
    BaseClass::showThreadFullInfo();
@@ -58,14 +62,23 @@ void StrobeThread::threadInitFunction()
 //******************************************************************************
 //******************************************************************************
 
+void StrobeThread::threadExitFunction()
+{
+// mOutGPIO.streamClose();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void StrobeThread::executeOnTimer(int aTimeCount)
 {
-   if (aTimeCount < 20) return;
-
+// if (aTimeCount < 20) return;
    switch (mTestCode)
    {
-      case 1: executeTest1 (aTimeCount); break;
-      case 2: executeTest2 (aTimeCount); break;
+      case 1: executeTest1(aTimeCount); break;
+      case 2: executeTest2(aTimeCount); break;
+      case 3: executeTest3(aTimeCount); break;
    }
 }
 
@@ -103,6 +116,28 @@ void StrobeThread::executeTest2(int aTimeCount)
       aTimeCount,
       BaseClass::getThreadProcessorNumber(),
       Ris::getCurrentProgramTime());
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void StrobeThread::executeTest3(int aTimeCount)
+{
+   mOutGPIO.setDirection(OUTPUT);
+
+   if (aTimeCount % 2 == 0)
+   {
+      TS::print(0, "TEST3 %5d LOW ", aTimeCount);
+//    mOutGPIO.streamWrite(LOW);
+      mOutGPIO.setValue(LOW);
+   }
+   else
+   {
+      TS::print(0, "TEST3 %5d HIGH", aTimeCount);
+//    mOutGPIO.streamWrite(HIGH);
+       mOutGPIO.setValue(HIGH);
+   }
 }
 
 //******************************************************************************

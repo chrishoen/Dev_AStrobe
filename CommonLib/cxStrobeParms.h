@@ -82,6 +82,9 @@ public:
    //***************************************************************************
    // Members.
 
+   // Test code.
+   int  mTestCode;
+
    // Timer thread.
    int  mTimerThreadPeriod;
 

@@ -10,6 +10,10 @@ Timer test thread.
 #include "risThreadsTimerThread.h"
 #include "risTimeMarker.h"
 
+#include "GPIO.h"
+
+using namespace exploringBB;
+
 namespace CX
 {
 //******************************************************************************
@@ -35,6 +39,13 @@ public:
    //******************************************************************************
    //******************************************************************************
    //******************************************************************************
+   // Members.
+
+   GPIO mOutGPIO;
+
+   //******************************************************************************
+   //******************************************************************************
+   //******************************************************************************
    // Methods.
 
    // Constructor.
@@ -42,10 +53,12 @@ public:
 
    // Base class overloads.
    void threadInitFunction() override;
+   void threadExitFunction() override;
    void executeOnTimer(int aTimeCount) override;
 
    void executeTest1 (int aTimeCount);
    void executeTest2 (int aTimeCount);
+   void executeTest3 (int aTimeCount);
 };
 
 //******************************************************************************

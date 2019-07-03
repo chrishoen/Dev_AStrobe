@@ -38,6 +38,7 @@ void StrobeParms::reset()
    mStrobeEnable = false;
    mShowCode = 0;
 
+   mTestCode = 0;
    mTimerThreadPeriod = 0;
    mTimeMarkerSize = 0;
 }
@@ -59,9 +60,9 @@ void StrobeParms::show()
    printf("\n");
    printf("StrobePrintLevel            %-10s\n", mStrobePrintLevel.asString(tBuffer));
    printf("\n");
+   printf("TestCode                    %-10d\n", mTestCode);
    printf("TimerThreadPeriod           %-10d\n", mTimerThreadPeriod);
    printf("TimeMarkerSize              %-10d\n", mTimeMarkerSize);
-
 }
 
 //******************************************************************************
@@ -79,6 +80,7 @@ void StrobeParms::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("ShowCode"))                 mShowCode = aCmd->argInt(1);
    if (aCmd->isCmd("StrobePrintLevel"))         mStrobePrintLevel.readArgs(aCmd);
 
+   if (aCmd->isCmd("TestCode"))                 mTestCode = aCmd->argInt(1);
    if (aCmd->isCmd("TimerThreadPeriod"))        mTimerThreadPeriod = aCmd->argInt(1);
    if (aCmd->isCmd("TimeMarkerSize"))           mTimeMarkerSize = aCmd->argInt(1);
 }
