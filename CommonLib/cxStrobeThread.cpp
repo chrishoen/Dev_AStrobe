@@ -40,7 +40,7 @@ StrobeThread::StrobeThread()
 
    // Members
    mTPFlag = false;
-   mTestCode = 3;
+   mTestCode = gStrobeParms.mTestCode;
    mTestCount = 0;
 }
 
@@ -50,10 +50,10 @@ StrobeThread::StrobeThread()
 
 void StrobeThread::threadInitFunction()
 {
-// mOutGPIO.streamOpen();
+   mOutGPIO.streamOpen();
    mOutGPIO.setDirection(OUTPUT);
 
-   if (mTestCode !=3) return;
+   if (mTestCode != 4) return;
 
    BaseClass::showThreadFullInfo();
 }
@@ -124,19 +124,15 @@ void StrobeThread::executeTest2(int aTimeCount)
 
 void StrobeThread::executeTest3(int aTimeCount)
 {
-   mOutGPIO.setDirection(OUTPUT);
-
    if (aTimeCount % 2 == 0)
    {
-      TS::print(0, "TEST3 %5d LOW ", aTimeCount);
-//    mOutGPIO.streamWrite(LOW);
-      mOutGPIO.setValue(LOW);
+      mOutGPIO.streamWrite(LOW);
+      //mOutGPIO.setValue(LOW);
    }
    else
    {
-      TS::print(0, "TEST3 %5d HIGH", aTimeCount);
-//    mOutGPIO.streamWrite(HIGH);
-       mOutGPIO.setValue(HIGH);
+      mOutGPIO.streamWrite(HIGH);
+      //mOutGPIO.setValue(HIGH);
    }
 }
 
