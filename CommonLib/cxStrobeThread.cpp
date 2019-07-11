@@ -50,7 +50,7 @@ StrobeThread::StrobeThread()
 
 void StrobeThread::threadInitFunction()
 {
-   mOutGPIO.exportGPIO();
+ //mOutGPIO.exportGPIO();
    mOutGPIO.streamOpen();
    mOutGPIO.setDirection(OUTPUT);
 
@@ -66,7 +66,7 @@ void StrobeThread::threadInitFunction()
 void StrobeThread::threadExitFunction()
 {
    mOutGPIO.streamClose();
-   mOutGPIO.unexportGPIO();
+ //mOutGPIO.unexportGPIO();
 }
 
 //******************************************************************************
