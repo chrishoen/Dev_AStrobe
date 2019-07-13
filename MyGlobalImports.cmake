@@ -14,11 +14,13 @@ function(my_init_global_import_variables)
       set (MyRisLibImportPath  "/usr/local/lib/libRisLib.a" PARENT_SCOPE)
       set (MyCisLibIncludePath "/usr/local/include/CisLib" PARENT_SCOPE)
       set (MyCisLibImportPath  "/usr/local/lib/libCisLib.a" PARENT_SCOPE)
+      set (MyPRULibImportPath  "/usr/lib/libprussdrv.a" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "C:/MyTools/MyLib/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "C:/MyTools/MyLib/lib/libRisLib.a" PARENT_SCOPE)
       set (MyCisLibIncludePath "C:/MyTools/MyLib/include/CisLib" PARENT_SCOPE)
       set (MyCisLibImportPath  "C:/MyTools/MyLib/lib/libCisLib.a" PARENT_SCOPE)
+      set (MyPRULibImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/libc/usr/lib/libprussdrv.a" PARENT_SCOPE)
    endif()
 endfunction()
 
@@ -72,6 +74,19 @@ endfunction()
 function(my_inc_import_CisLib _target)
 
    target_include_directories(${_target} PUBLIC ${MyCisLibIncludePath})
+
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_lib_import_PRULib _target)
+
+   add_library(PRULib STATIC IMPORTED)
+   set_target_properties(PRULib PROPERTIES IMPORTED_LOCATION ${MyPRULibImportPath})
+
+   target_link_libraries(${_target} PRULib)
 
 endfunction()
 
