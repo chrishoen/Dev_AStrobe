@@ -3,7 +3,6 @@
 
 #include "risThreadsProcess.h"
 #include "MainInit.h"
-#include "MainPRU.h"
 #include "risCmdLineConsole.h"
 #include "CmdLineExec.h"
 
@@ -22,7 +21,6 @@ int main(int argc,char** argv)
    // Begin program.
 
    main_initialize(argc, argv);
-   pru_initialize();
 
    //***************************************************************************
    //***************************************************************************
@@ -78,7 +76,6 @@ int main(int argc,char** argv)
    //***************************************************************************
    // End program.
 
-   pru_finalize();
    main_finalize();
    return 0;
 }

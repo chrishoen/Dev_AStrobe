@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 
+#include "pthread.h"
 #include "CmdLineExec.h"
 
 #include "risThreadsThreads.h"
