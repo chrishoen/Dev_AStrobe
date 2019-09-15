@@ -8,10 +8,8 @@ my_add_pch (cstrobe)
 
 my_inc_import_CommonLib(cstrobe)
 my_inc_import_RisLib(cstrobe)
-my_inc_import_CisLib(cstrobe)
 
 my_lib_import_CommonLib(cstrobe)
-my_lib_import_CisLib(cstrobe)
 my_lib_import_RisLib(cstrobe)
 my_lib_import_PRULib(cstrobe)
 

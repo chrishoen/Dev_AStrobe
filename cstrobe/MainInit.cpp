@@ -2,7 +2,7 @@
 
 #include "risThreadsProcess.h"
 
-#include "cisCProcDir.h"
+#include "risBaseDir.h"
 #include "risPortableCalls.h"
 #include "cxStrobeParms.h"
 
@@ -20,13 +20,21 @@ void main_initialize(int argc,char** argv)
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Set program directory.
+
+   // Set the base directory global variable to the cproc directory path.
+   Ris::setBaseDirectory("/opt/cproc");
+
+   // Set the program working directory to the cproc directory path.
+   Ris::chdirToBaseDirectory();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Enter process.
 
    // Set program process for high priority.
    Ris::Threads::enterProcessHigh();
-
-   // Set the program working directory to the cproc directory path.
-   Cis::setProgramDirToCProc();
 
    //***************************************************************************
    //***************************************************************************

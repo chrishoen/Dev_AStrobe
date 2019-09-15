@@ -5,7 +5,6 @@
 #include "stdafx.h"
 
 #include "risCmdLineFile.h"
-#include "cisCProcDir.h"
 
 #define  _CXSTROBEPARMS_CPP_
 #include "cxStrobeParms.h"
@@ -33,7 +32,7 @@ StrobeParms::StrobeParms()
 void StrobeParms::reset()
 {
    BaseClass::reset();
-   BaseClass::setFilePath("./files/Strobe_Parms.txt");
+   BaseClass::setFileName_RelativeToBaseDir("files/Strobe_Parms.txt");
 
    mStrobeEnable = false;
    mShowCode = 0;

@@ -11,4 +11,3 @@ my_add_pch (CommonLib)
 target_include_directories(CommonLib INTERFACE ${PROJECT_SOURCE_DIR})
 
 my_inc_import_RisLib(CommonLib)
-my_inc_import_CisLib(CommonLib)
