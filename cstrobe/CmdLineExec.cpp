@@ -72,6 +72,7 @@ void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1 (Ris::CmdLineCmd* aCmd)
 {
+   Prn::print(Prn::View11, "GO1");
 }
 
 //******************************************************************************

@@ -32,7 +32,7 @@ StrobeParms::StrobeParms()
 void StrobeParms::reset()
 {
    BaseClass::reset();
-   BaseClass::setFileName_RelativeToBaseDir("files/Strobe_Parms.txt");
+   BaseClass::setFilePath_RelativeToBaseDir("files/Strobe_Parms.txt");
 
    mStrobeEnable = false;
    mShowCode = 0;
