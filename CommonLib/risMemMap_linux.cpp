@@ -43,16 +43,24 @@ static const int cPageSize = 4096;
 
 void* getMemMapVirtualAddress(void* aPhysicalAddress, int aNumPages)
 {
-   // Calculate the size of memory to allocate.
+   // Calculate the number of bytes to allocate.
    size_t tLength = cPageSize * aNumPages;
    unsigned tMask = tLength - 1;
+
+   // Get the physical address from the input. Mask according to the length.
    off_t tPhysicalAddress = (off_t)aPhysicalAddress & (off_t)~tMask;
 
    // Open a file to the memory system.
    int tMemoryFd = open("/dev/mem", O_RDWR | O_SYNC);
 
+   // Map the memory.
    void* tVirtualAddress = mmap(0, tLength, PROT_READ | PROT_WRITE, MAP_SHARED, tMemoryFd, tPhysicalAddress);
 
+   // Close the file.
+   close(tMemoryFd);
+
+   // Done.
+   return tVirtualAddress;
 }
 
 //******************************************************************************
