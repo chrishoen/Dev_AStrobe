@@ -18,7 +18,7 @@ namespace Ris
  
 // Instruct the OS kernel to map a physical address to a virtual address.
 // Return the virtual address.
-void* getMemMapVirtualAddress(void* aPhyicalAddress);
+void* getMemMapVirtualAddress(void* aPhyicalAddress,int aNumPages = 1);
 
 
 //******************************************************************************
