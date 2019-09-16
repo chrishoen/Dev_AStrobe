@@ -10,6 +10,7 @@
 #include "cxStrobeThread.h"
 #include "cxStrobeParms.h"
 #include "cxPruHello.h"
+#include "pruShare.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -32,6 +33,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("TP"))     executeTP(aCmd);
    if (aCmd->isCmd("TEST"))   executeTest(aCmd);
    if (aCmd->isCmd("HELLO"))  executeHello(aCmd);
+   if (aCmd->isCmd("RP"))     executeReadPru(aCmd);
    if (aCmd->isCmd("GO1"))    executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))    executeGo2(aCmd);
    if (aCmd->isCmd("GO3"))    executeGo3(aCmd);
@@ -65,6 +67,15 @@ void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
    CX::doPruHello();
 }
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeReadPru(Ris::CmdLineCmd* aCmd)
+{
+   int* tCounterPtr = (int*)Pru::gShare.mSharedMem;
+   Prn::print(0, "PruCounter %d",*tCounterPtr);
+}
 
 //******************************************************************************
 //******************************************************************************

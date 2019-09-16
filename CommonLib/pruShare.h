@@ -25,7 +25,7 @@ public:
    // Constants.
 
    // State variable values.
-   static const unsigned cState_None       = -1;
+   static const unsigned cPhysicalAddress_SharedMem = 0x4a310000;
 
    //***************************************************************************
    //***************************************************************************
@@ -33,7 +33,7 @@ public:
    // Members:
 
    // Memory mapped pointers.
-   void* mRam0;
+   void* mSharedMem;
 
    //***************************************************************************
    //***************************************************************************

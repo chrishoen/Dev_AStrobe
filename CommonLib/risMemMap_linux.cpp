@@ -34,7 +34,7 @@ static const int cPageSize = 4096;
 // Instruct the OS kernel to map a physical address to a virtual address.
 // Return the virtual address.
 
-void* getMemMapVirtualAddress(void* aPhysicalAddress, int aNumPages)
+void* getMemMapVirtualAddress(unsigned aPhysicalAddress, int aNumPages)
 {
    // Calculate the number of bytes to allocate.
    size_t tLength = cPageSize * aNumPages;

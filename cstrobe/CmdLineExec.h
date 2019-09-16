@@ -18,6 +18,7 @@ public:
   void executeTP      (Ris::CmdLineCmd* aCmd);
   void executeHello   (Ris::CmdLineCmd* aCmd);
   void executeTest    (Ris::CmdLineCmd* aCmd);
+  void executeReadPru (Ris::CmdLineCmd* aCmd);
   void executeGo1     (Ris::CmdLineCmd* aCmd);
   void executeGo2     (Ris::CmdLineCmd* aCmd);
   void executeGo3     (Ris::CmdLineCmd* aCmd);

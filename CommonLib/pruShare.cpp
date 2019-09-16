@@ -27,7 +27,7 @@ Share::Share()
 
 void Share::reset()
 {
-   mRam0 = 0;
+   mSharedMem = 0;
 }
 
 //******************************************************************************
@@ -37,7 +37,7 @@ void Share::reset()
 
 void Share::initialize()
 {
-   mRam0 = 0;
+   mSharedMem = Ris::getMemMapVirtualAddress(cPhysicalAddress_SharedMem);
 }
 
 //******************************************************************************
