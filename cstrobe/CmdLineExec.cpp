@@ -74,7 +74,7 @@ void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeReadPru(Ris::CmdLineCmd* aCmd)
 {
    int* tCounterPtr = (int*)Pru::gShare.mSharedMem;
-   Prn::print(0, "PruCounter %d",*tCounterPtr);
+   Prn::print(0, "PruCounter %d", *tCounterPtr);
 }
 
 //******************************************************************************
