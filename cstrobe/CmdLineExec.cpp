@@ -64,7 +64,7 @@ void CmdLineExec::executeTest(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 {
-   CX::doPruHello();
+   CX::doPruHello(); 
 }
 
 //******************************************************************************
