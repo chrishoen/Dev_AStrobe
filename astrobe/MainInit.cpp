@@ -14,9 +14,9 @@
 
 void main_initialize(int argc,char** argv)
 {
-   printf("CStrobe Program********************************************BEGIN\n");
-   printf("CStrobe Program********************************************BEGIN\n");
-   printf("CStrobe Program********************************************BEGIN\n\n");
+   printf("AStrobe Program********************************************BEGIN\n");
+   printf("AStrobe Program********************************************BEGIN\n");
+   printf("AStrobe Program********************************************BEGIN\n\n");
 
    //***************************************************************************
    //***************************************************************************
@@ -43,8 +43,8 @@ void main_initialize(int argc,char** argv)
    // Initialize thread services.
 
    TS::reset();
-   TS::setProgramName("CStrobe");
-   TS::setProgramLogFilepath("log/CStrobeLog.txt");
+   TS::setProgramName("AStrobe");
+   TS::setProgramLogFilepath("log/AStrobeLog.txt");
    TS::setProgramPrintLevel(TS::PrintLevel(0, 3));
    TS::initialize();
 
@@ -107,7 +107,7 @@ void main_finalize()
 
    // Done.
    printf("\n");
-   printf("CStrobe Program********************************************END\n\n");
+   printf("AStrobe Program********************************************END\n\n");
 }
 
 //******************************************************************************
