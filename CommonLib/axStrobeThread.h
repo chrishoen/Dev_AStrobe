@@ -14,7 +14,7 @@ Timer test thread.
 
 using namespace exploringBB;
 
-namespace CX
+namespace AX
 {
 //******************************************************************************
 //******************************************************************************
@@ -66,7 +66,7 @@ public:
 //******************************************************************************
 // Global instance
 
-#ifdef _CXSTROBETHREAD_CPP_
+#ifdef _AXSTROBETHREAD_CPP_
           StrobeThread* gStrobeThread;
 #else
    extern StrobeThread* gStrobeThread;

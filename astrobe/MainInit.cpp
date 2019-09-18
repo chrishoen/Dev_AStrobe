@@ -4,7 +4,7 @@
 
 #include "risBaseDir.h"
 #include "risPortableCalls.h"
-#include "cxStrobeParms.h"
+#include "axStrobeParms.h"
 #include "pruShare.h"
 
 //******************************************************************************
@@ -53,8 +53,8 @@ void main_initialize(int argc,char** argv)
    //***************************************************************************
 
    // Read parameters files.
-   CX::gStrobeParms.reset();
-   CX::gStrobeParms.readSection("default");
+   AX::gStrobeParms.reset();
+   AX::gStrobeParms.readSection("default");
 
    //***************************************************************************
    //***************************************************************************

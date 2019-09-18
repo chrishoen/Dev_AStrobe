@@ -12,12 +12,12 @@ Description:
 #include "tsThreadServices.h"
 
 #include "cmnPriorities.h"
-#include "cxStrobeParms.h"
+#include "axStrobeParms.h"
 
-#define  _CXSTROBETHREAD_CPP_
-#include "cxStrobeThread.h"
+#define  _AXSTROBETHREAD_CPP_
+#include "axStrobeThread.h"
 
-namespace CX
+namespace AX
 {
 
 //******************************************************************************

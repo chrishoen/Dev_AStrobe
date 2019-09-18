@@ -13,9 +13,9 @@ Description:
 #include <string.h>
 #include <sys/poll.h>
 
-#include "cxPruHello.h"
+#include "axPruHello.h"
 
-namespace CX
+namespace AX
 {
 
 //******************************************************************************

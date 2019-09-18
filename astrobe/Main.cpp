@@ -6,8 +6,8 @@
 #include "risCmdLineConsole.h"
 #include "CmdLineExec.h"
 
-#include "cxStrobeParms.h"
-#include "cxStrobeThread.h"
+#include "axStrobeParms.h"
+#include "axStrobeThread.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -27,10 +27,10 @@ int main(int argc,char** argv)
    //***************************************************************************
    // Launch program threads.
 
-   if (CX::gStrobeParms.mStrobeEnable)
+   if (AX::gStrobeParms.mStrobeEnable)
    {
-      CX::gStrobeThread = new CX::StrobeThread;
-      CX::gStrobeThread->launchThread();
+      AX::gStrobeThread = new AX::StrobeThread;
+      AX::gStrobeThread->launchThread();
    }
 
    //***************************************************************************
@@ -39,7 +39,7 @@ int main(int argc,char** argv)
    // Show program threads.
 
    Ris::Threads::showCurrentThreadInfo();
-   if (CX::gStrobeThread)   CX::gStrobeThread->showThreadInfo();
+   if (AX::gStrobeThread)   AX::gStrobeThread->showThreadInfo();
 
    //***************************************************************************
    //***************************************************************************
@@ -55,9 +55,9 @@ int main(int argc,char** argv)
    //***************************************************************************
    // Shutdown program threads.
 
-   if (CX::gStrobeThread)
+   if (AX::gStrobeThread)
    {
-      CX::gStrobeThread->shutdownThread();
+      AX::gStrobeThread->shutdownThread();
    }
 
    //***************************************************************************
@@ -65,10 +65,10 @@ int main(int argc,char** argv)
    //***************************************************************************
    // Delete program threads.
 
-   if (CX::gStrobeThread)
+   if (AX::gStrobeThread)
    {
-      delete CX::gStrobeThread;
-      CX::gStrobeThread = 0;
+      delete AX::gStrobeThread;
+      AX::gStrobeThread = 0;
    }
 
    //***************************************************************************

@@ -15,7 +15,7 @@ Parameters class whose values are read from a command file.
 //******************************************************************************
 //******************************************************************************
 
-namespace CX
+namespace AX
 {
 
 //******************************************************************************
@@ -122,7 +122,7 @@ public:
 //******************************************************************************
 // Global instance.
 
-#ifdef _CXSTROBEPARMS_CPP_
+#ifdef _AXSTROBEPARMS_CPP_
    StrobeParms gStrobeParms;
 #else
    extern StrobeParms gStrobeParms;

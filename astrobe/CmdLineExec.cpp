@@ -7,9 +7,9 @@
 #include "risThreadsThreads.h"
 #include "risTimeMarker.h"
 
-#include "cxStrobeThread.h"
-#include "cxStrobeParms.h"
-#include "cxPruHello.h"
+#include "axStrobeThread.h"
+#include "axStrobeParms.h"
+#include "axPruHello.h"
 #include "pruShare.h"
 
 //******************************************************************************
@@ -46,7 +46,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeTP(Ris::CmdLineCmd* aCmd)
 {
-   CX::gStrobeThread->mTPFlag=aCmd->argBool(1);
+   AX::gStrobeThread->mTPFlag=aCmd->argBool(1);
 }
 
 //******************************************************************************
@@ -55,7 +55,7 @@ void CmdLineExec::executeTP(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeTest(Ris::CmdLineCmd* aCmd)
 {
-   CX::gStrobeThread->mTestCode=aCmd->argInt(1);
+   AX::gStrobeThread->mTestCode=aCmd->argInt(1);
 }
 
 //******************************************************************************
@@ -64,7 +64,7 @@ void CmdLineExec::executeTest(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 {
-   CX::doPruHello(); 
+   AX::doPruHello(); 
 }
 
 //******************************************************************************
@@ -108,7 +108,7 @@ void CmdLineExec::executeGo3 (Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
-   CX::gStrobeParms.show();
+   AX::gStrobeParms.show();
 }
 
 
