@@ -12,13 +12,13 @@ my_inc_import_RisLib(Test)
 my_lib_import_RisLib(Test)
 
 if (MSVC)
-   install(TARGETS Test DESTINATION "C:\\aaa_cproc\\bin")
+   install(TARGETS Test DESTINATION "C:\\aaa_aproc\\bin")
 elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
-   install(TARGETS Test DESTINATION "/opt/cproc/bin")
+   install(TARGETS Test DESTINATION "/opt/aproc/bin")
 else()
    add_custom_command(
       TARGET  Test
       POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx Test rsync://debian@bbx/cproc/bin
-      WORKING_DIRECTORY C:/Users/chris/CMakeBuilds/Dev_CStrobe/Test)
+      COMMAND rsync -azv --chmod=ugo=rwx Test rsync://debian@bbx/aproc/bin
+      WORKING_DIRECTORY C:/Users/chris/CMakeBuilds/Dev_AStrobe/Test)
 endif()
