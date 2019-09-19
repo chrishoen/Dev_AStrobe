@@ -73,7 +73,7 @@ void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeReadPru(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(0, "PruShare N1 %d", Pru::gShare.mSharedMem->mN1);
+   Prn::print(0, "PruShare N1 %d", gPruShare->mN1);
 }
 
 //******************************************************************************
