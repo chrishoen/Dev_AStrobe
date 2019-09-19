@@ -37,7 +37,7 @@ void Share::reset()
 
 void Share::initialize()
 {
-   mSharedMem = Ris::getMemMapVirtualAddress(cPhysicalAddress_SharedMem);
+   mSharedMem = (PruShareT*)Ris::getMemMapVirtualAddress(cPhysicalAddress_SharedMem);
 }
 
 //******************************************************************************
