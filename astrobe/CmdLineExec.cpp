@@ -74,7 +74,13 @@ void CmdLineExec::executeHello(Ris::CmdLineCmd* aCmd)
 void CmdLineExec::executeReadPru(Ris::CmdLineCmd* aCmd)
 {
    Prn::print(0, "PruShare N1 %d", gPruShare->mN1);
+   Prn::print(0, "PruShare N2 %d", gPruShare->mN2);
+   Prn::print(0, "PruShare N3 %d", gPruShare->mN3);
+   Prn::print(0, "PruShare N4 %d", gPruShare->mN4);
    Prn::print(0, "PruShare U1 %u", gPruShare->mU1);
+   Prn::print(0, "PruShare U2 %u", gPruShare->mU2);
+   Prn::print(0, "PruShare U3 %u", gPruShare->mU3);
+   Prn::print(0, "PruShare U4 %u", gPruShare->mU4);
 }
 
 //******************************************************************************
@@ -92,6 +98,16 @@ void CmdLineExec::executeGo1 (Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2 (Ris::CmdLineCmd* aCmd)
 {
+   aCmd->setArgDefaultUnsigned(1, 1);
+   aCmd->setArgDefaultUnsigned(2, 0xffffffff);
+
+   unsigned tU1 = aCmd->argUnsigned(1);
+   unsigned tU2 = aCmd->argUnsigned(2);
+   unsigned tDelta = tU1 - tU2;
+
+   Prn::print(0, "U1    %8x %u", tU1, tU1);
+   Prn::print(0, "U2    %8x %u", tU2, tU2);
+   Prn::print(0, "Delta %u", tDelta,tDelta);
 }
 
 //******************************************************************************
