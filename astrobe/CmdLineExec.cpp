@@ -81,6 +81,12 @@ void CmdLineExec::executeReadPru(Ris::CmdLineCmd* aCmd)
    Prn::print(0, "PruShare U2 %u", gPruShare->mU2);
    Prn::print(0, "PruShare U3 %u", gPruShare->mU3);
    Prn::print(0, "PruShare U4 %u", gPruShare->mU4);
+   Prn::print(0, "PruShare U4 %u", gPruShare->mU4);
+
+   Prn::print(0, "");
+   Prn::print(0, "PruShare ArmTxMsgState %d", gPruShare->mArmTxMsgState);
+   Prn::print(0, "PruShare ArmTxMsgCount %d", gPruShare->mArmTxMsgCount);
+      
 }
 
 //******************************************************************************
