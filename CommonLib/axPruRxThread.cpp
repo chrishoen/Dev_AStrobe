@@ -36,7 +36,7 @@ PruRxThread::PruRxThread()
 {
    // Set base class variables.
    BaseClass::setThreadName("PruRx");
-   BaseClass::setThreadPrintLevel(gStrobeParms.mStrobePrintLevel);
+   BaseClass::setThreadPrintLevel(gStrobeParms.mPruRxPrintLevel);
    BaseClass::setThreadPriority(Cmn::gPriorities.mPruRx);
 
    // Set member variables.
@@ -114,22 +114,95 @@ void  PruRxThread::threadRunFunction()
    if (!mValidFlag) return;
       
    char tReadBuf[512];
-   int tResult = 0;
+   int tRet = 0;
 
    while (true)
    {
       if (BaseThreadWithTermFlag::mTerminateFlag) break;
 
-      tResult = read(mReadFd, tReadBuf, 512);
-      if (tResult > 0)
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Poll the port for a read or a close.
+
+      // Read.
+      TS::print(5, "prurx_poll_start");
+
+      struct pollfd tPollFd[2];
+      tPollFd[0].fd = mReadFd;
+      tPollFd[0].events = POLLIN;
+      tPollFd[0].revents = 0;
+      tPollFd[1].fd = mEventFd;
+      tPollFd[1].events = POLLIN;
+      tPollFd[1].revents = 0;
+
+      // Poll the port for read.
+      tRet = poll(&tPollFd[0], 2, -1);
+
+      // Test the valid flag for closing.
+      if (!mValidFlag)
       {
-         Prn::print(Prn::View11, "RxMessage %s",tReadBuf);
-      }
-      else
-      {
-         Prn::print(Prn::View11, "RxMessage Error %d", tResult);
+         TS::print(1, "prurx_poll_invalid close");
          return;
       }
+
+      // Test the return code for error.
+      if (tRet < 0)
+      {
+         TS::print(1, "prurx_poll_error_1 %d", errno);
+         return;
+      }
+
+      // Test the return code for timeout.
+      if (tRet == 0)
+      {
+         TS::print(1, "prurx_poll_error_2 timeout");
+         return;
+      }
+
+      if (tPollFd[0].revents & POLLIN)
+      {
+         TS::print(5, "prurx_poll_event0 %d %04X", tRet, tPollFd[0].revents);
+      }
+
+      if (tPollFd[1].revents & POLLIN)
+      {
+         TS::print(5, "prurx_poll_event1 %d %04X", tRet, tPollFd[1].revents);
+         return;
+      }
+
+      // Test the return code for closed port.
+      if (tRet == 2)
+      {
+         TS::print(1, "prurx_poll_error_3 close");
+         return;
+      }
+
+      TS::print(5, "prurx_poll_pass %d", tRet);
+
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Read from port.
+
+      // Read.
+      TS::print(5, "serial_read_start");
+      tRet = (int)read(mReadFd, tReadBuf, 512);
+
+      // Test the return code.
+      if (tRet < 0)
+      {
+         TS::print(0, "prurx_read_error_1 %d", errno);
+         return;
+      }
+
+      TS::print(5, "prurx_read_pass %d",tRet);
+      Prn::print(Prn::View11, "RxMessage %s", tReadBuf);
+
+      //***************************************************************************
+      //***************************************************************************
+      //***************************************************************************
+      // Done.
    }
 }
 

@@ -47,6 +47,7 @@ int main(int argc,char** argv)
 
    Ris::Threads::showCurrentThreadInfo();
    if (AX::gStrobeThread)   AX::gStrobeThread->showThreadInfo();
+   if (AX::gPruRxThread)    AX::gPruRxThread->showThreadInfo();
 
    //***************************************************************************
    //***************************************************************************
