@@ -134,6 +134,7 @@ void PruRxThread::shutdownThread()
    shutdownThreadPrologue();
    BaseThreadWithTermFlag::mTerminateFlag = true;
 
+   Prn::print(Prn::View11, "closing here");
    close(mPru30Fd);
 
    BaseThreadWithTermFlag::waitForThreadTerminate();
