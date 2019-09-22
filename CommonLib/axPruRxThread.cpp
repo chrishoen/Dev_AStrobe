@@ -39,7 +39,7 @@ PruRxThread::PruRxThread()
    // Set member variables.
    strcpy(mPru30DeviceName, "/dev/rpmsg_pru30");
    strcpy(mPru31DeviceName, "/dev/rpmsg_pru31");
-   mPollFds.fd = 0;
+   mPollFds = 0;
 }
 
 //******************************************************************************
@@ -56,7 +56,7 @@ void PruRxThread::threadInitFunction()
 
    /* Open the rpmsg_pru character device file */
    TS::print(0,"opening    %s", mPru30DeviceName);
-   mPollFds.fd = open(mPru30DeviceName, O_RDWR);
+   mPollFds = open(mPru30DeviceName, O_RDWR);
 
    /*
    * If the RPMsg channel doesn't exist yet the character device
@@ -64,8 +64,8 @@ void PruRxThread::threadInitFunction()
    * Make sure the PRU firmware is loaded and that the rpmsg_pru
    * module is inserted.
    */
-   if (mPollFds.fd < 0) {
-      TS::print(0, "open error %d", mPollFds.fd);
+   if (mPollFds < 0) {
+      TS::print(0, "open error %d", mPollFds);
       return;
    }
    else
@@ -74,7 +74,7 @@ void PruRxThread::threadInitFunction()
    }
 
    /* Send 'hello world!' to the PRU through the RPMsg channel */
-   result = write(mPollFds.fd, "hello world_0!", 13);
+   result = write(mPollFds, "hello world_0!", 13);
    TS::print(0, "write      %d", result);
 }
 
@@ -94,7 +94,7 @@ void  PruRxThread::threadRunFunction()
    {
       if (BaseThreadWithTermFlag::mTerminateFlag) break;
 
-      tResult = read(mPollFds.fd, tReadBuf, 512);
+      tResult = read(mPollFds, tReadBuf, 512);
       if (tResult > 0)
       {
          Prn::print(Prn::View11, "RxMessage %s",tReadBuf);
@@ -134,7 +134,7 @@ void PruRxThread::shutdownThread()
    shutdownThreadPrologue();
    BaseThreadWithTermFlag::mTerminateFlag = true;
 
-   close(mPollFds.fd);
+   close(mPollFds);
 
    BaseThreadWithTermFlag::waitForThreadTerminate();
 }
