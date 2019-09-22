@@ -38,6 +38,9 @@ public:
    //***************************************************************************
    // Members.
 
+   // Valid flag.
+   bool mValidFlag;
+
    // Device names.
    char mPru30DeviceName[40];
    char mPru31DeviceName[40];

@@ -40,6 +40,7 @@ PruRxThread::PruRxThread()
    BaseClass::setThreadPriority(Cmn::gPriorities.mPruRx);
 
    // Set member variables.
+   mValidFlag = false;
    strcpy(mPru30DeviceName, "/dev/rpmsg_pru30");
    strcpy(mPru31DeviceName, "/dev/rpmsg_pru31");
    mReadFd = 0;
@@ -95,6 +96,9 @@ void PruRxThread::threadInitFunction()
 
    result = write(mReadFd, "hello world_0!", 13);
    TS::print(0, "write      %d", result);
+
+   // Done.
+   mValidFlag = true;
 }
 
 //******************************************************************************
@@ -106,6 +110,9 @@ void PruRxThread::threadInitFunction()
 
 void  PruRxThread::threadRunFunction()
 {
+   // Guard.
+   if (!mValidFlag) return;
+      
    char tReadBuf[512];
    int tResult = 0;
 
@@ -151,12 +158,33 @@ void PruRxThread::threadExitFunction()
 void PruRxThread::shutdownThread()
 {
    shutdownThreadPrologue();
-   BaseThreadWithTermFlag::mTerminateFlag = true;
 
-   Prn::print(Prn::View11, "closing here");
-   close(mReadFd);
+   // Guard.
+   if (!mValidFlag) return;
 
-   BaseThreadWithTermFlag::waitForThreadTerminate();
+   BaseClass::mTerminateFlag = true;
+
+   int tRet = 0;
+
+   // Write bytes to the event semaphore.
+   unsigned long long tCount = 1;
+   tRet = write(mEventFd, &tCount, 8);
+
+   // Close the port.
+   tRet = close(mReadFd);
+
+   // Test the return code.
+   if (tRet != 0)
+   {
+      TS::print(1, "close_error_1 %d", errno);
+   }
+
+   // Done.
+   mReadFd = 0;
+   mValidFlag = false;
+
+   // Wait for thread terminate.
+   BaseClass::waitForThreadTerminate();
 }
 
 //******************************************************************************
