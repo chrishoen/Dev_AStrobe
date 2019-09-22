@@ -30,8 +30,6 @@ StrobeThread::StrobeThread()
    // Set base class variables.
    BaseClass::setThreadName("Strobe");
    BaseClass::setThreadPrintLevel(gStrobeParms.mStrobePrintLevel);
-
-   // Set base class variables.
    BaseClass::setThreadPriority(Cmn::gPriorities.mStrobe);
 
    // Set timer period.

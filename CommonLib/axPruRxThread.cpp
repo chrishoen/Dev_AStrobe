@@ -13,8 +13,12 @@
 #include <string.h>
 #include <sys/poll.h>
 
-#include "prnPrint.h"
-#include "risThreadsPriorities.h"
+#include "risProgramTime.h"
+#include "cmnPriorities.h"
+#include "axStrobeParms.h"
+
+
+#define  _AXPRURXTHREAD_CPP_
 #include "axPruRxThread.h"
 
 namespace AX
@@ -29,8 +33,8 @@ PruRxThread::PruRxThread()
 {
    // Set base class variables.
    BaseClass::setThreadName("PruRx");
-   BaseClass::setThreadPriority(Ris::Threads::gPriorities.mNormal);
-   BaseClass::setThreadPrintLevel(TS::PrintLevel(0,3));
+   BaseClass::setThreadPrintLevel(gStrobeParms.mStrobePrintLevel);
+   BaseClass::setThreadPriority(Cmn::gPriorities.mPruRx);
 
    // Set member variables.
    strcpy(mPru30DeviceName, "/dev/rpmsg_pru30");
@@ -51,7 +55,7 @@ void PruRxThread::threadInitFunction()
    int pru_data;
 
    /* Open the rpmsg_pru character device file */
-   TS::print(0,"opening    %s\n", mPru30DeviceName);
+   TS::print(0,"opening    %s", mPru30DeviceName);
    mPollFds.fd = open(mPru30DeviceName, O_RDWR);
 
    /*
@@ -61,17 +65,17 @@ void PruRxThread::threadInitFunction()
    * module is inserted.
    */
    if (mPollFds.fd < 0) {
-      TS::print(0, "open error %d\n", mPollFds.fd);
+      TS::print(0, "open error %d", mPollFds.fd);
       return;
    }
    else
    {
-      TS::print(0, "opened\n");
+      TS::print(0, "PruRxThread  opened");
    }
 
    /* Send 'hello world!' to the PRU through the RPMsg channel */
    result = write(mPollFds.fd, "hello world_0!", 13);
-   TS::print(0, "write      %d\n", result);
+   TS::print(0, "write      %d", result);
 }
 
 //******************************************************************************
@@ -83,11 +87,23 @@ void PruRxThread::threadInitFunction()
 
 void  PruRxThread::threadRunFunction()
 {
-   bool tGoing = true;
-   bool tFirstFlag = true;
+   char tReadBuf[512];
+   int tResult = 0;
 
-   while (tGoing)
+   while (true)
    {
+      if (BaseThreadWithTermFlag::mTerminateFlag) break;
+
+      tResult = read(mPollFds.fd, tReadBuf, 512);
+      if (tResult > 0)
+      {
+         Prn::print(Prn::View11, "RxMessage %s",tReadBuf);
+      }
+      else
+      {
+         Prn::print(Prn::View11, "RxMessage Error %d", tResult);
+         return;
+      }
    }
 }
 

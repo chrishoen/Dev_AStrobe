@@ -24,6 +24,7 @@ Priorities::Priorities()
    mTsPrint           = Ris::Threads::Priority(-1, 20);
    mLogFile           = Ris::Threads::Priority(-1, 21);
    mStrobe            = Ris::Threads::Priority(-1, 95);
+   mPruRx             = Ris::Threads::Priority(-1, 94);
 }
 
 //******************************************************************************

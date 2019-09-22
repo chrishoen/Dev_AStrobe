@@ -70,12 +70,14 @@ public:
 
    // Thread enable flags.
    bool mStrobeEnable;
+   bool mPruRxEnable;
 
    // Print code.
    int mShowCode;
 
    // Thread print and log levels.
    TS::PrintLevel mStrobePrintLevel;
+   TS::PrintLevel mPruRxPrintLevel;
 
    //***************************************************************************
    //***************************************************************************

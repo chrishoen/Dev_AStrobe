@@ -33,6 +33,7 @@ public:
    Ris::Threads::Priority mTsPrint;
    Ris::Threads::Priority mLogFile;
    Ris::Threads::Priority mStrobe;
+   Ris::Threads::Priority mPruRx;
 
    //***************************************************************************
    //***************************************************************************

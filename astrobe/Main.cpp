@@ -8,6 +8,7 @@
 
 #include "axStrobeParms.h"
 #include "axStrobeThread.h"
+#include "axPruRxThread.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -31,6 +32,12 @@ int main(int argc,char** argv)
    {
       AX::gStrobeThread = new AX::StrobeThread;
       AX::gStrobeThread->launchThread();
+   }
+
+   if (AX::gStrobeParms.mPruRxEnable)
+   {
+      AX::gPruRxThread = new AX::PruRxThread;
+      AX::gPruRxThread->launchThread();
    }
 
    //***************************************************************************
@@ -60,6 +67,11 @@ int main(int argc,char** argv)
       AX::gStrobeThread->shutdownThread();
    }
 
+   if (AX::gPruRxThread)
+   {
+      AX::gPruRxThread->shutdownThread();
+   }
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -69,6 +81,12 @@ int main(int argc,char** argv)
    {
       delete AX::gStrobeThread;
       AX::gStrobeThread = 0;
+   }
+
+   if (AX::gPruRxThread)
+   {
+      delete AX::gPruRxThread;
+      AX::gPruRxThread = 0;
    }
 
    //***************************************************************************
