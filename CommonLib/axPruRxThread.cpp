@@ -55,9 +55,8 @@ PruRxThread::PruRxThread()
 
 void PruRxThread::threadInitFunction()
 {
-   int result = 0;
-
-   int pru_data;
+   int tRet = 0;
+   int tSeqNum = 0;
 
    //***************************************************************************
    //***************************************************************************
@@ -94,8 +93,8 @@ void PruRxThread::threadInitFunction()
    //**************************************************************************
    // Send first message.
 
-   result = write(mReadFd, "hello world_0!", 13);
-   TS::print(0, "write      %d", result);
+   tRet = write(mReadFd, &tSeqNum, 4);
+   TS::print(0, "write      %d", tRet);
 
    // Done.
    mValidFlag = true;
@@ -113,8 +112,8 @@ void  PruRxThread::threadRunFunction()
    // Guard.
    if (!mValidFlag) return;
       
-   char tReadBuf[512];
    int tRet = 0;
+   int tSeqNum = 0;
 
    while (true)
    {
@@ -187,7 +186,7 @@ void  PruRxThread::threadRunFunction()
 
       // Read.
       TS::print(5, "serial_read_start");
-      tRet = (int)read(mReadFd, tReadBuf, 512);
+      tRet = (int)read(mReadFd, &tSeqNum, 4);
 
       // Test the return code.
       if (tRet < 0)
@@ -197,7 +196,7 @@ void  PruRxThread::threadRunFunction()
       }
 
       TS::print(5, "prurx_read_pass %d",tRet);
-      Prn::print(Prn::View11, "RxMessage %s", tReadBuf);
+      Prn::print(Prn::View11, "RxMessage %u", tSeqNum);
 
       //***************************************************************************
       //***************************************************************************
