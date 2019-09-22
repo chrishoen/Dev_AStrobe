@@ -12,6 +12,9 @@
 #include <fcntl.h>
 #include <string.h>
 #include <sys/poll.h>
+#include <sys/eventfd.h>
+#include <sys/ioctl.h>
+
 
 #include "risProgramTime.h"
 #include "cmnPriorities.h"
@@ -39,7 +42,8 @@ PruRxThread::PruRxThread()
    // Set member variables.
    strcpy(mPru30DeviceName, "/dev/rpmsg_pru30");
    strcpy(mPru31DeviceName, "/dev/rpmsg_pru31");
-   mPru30Fd = 0;
+   mReadFd = 0;
+   mEventFd = 0;
 }
 
 //******************************************************************************
@@ -54,27 +58,42 @@ void PruRxThread::threadInitFunction()
 
    int pru_data;
 
-   /* Open the rpmsg_pru character device file */
-   TS::print(0,"opening    %s", mPru30DeviceName);
-   mPru30Fd = open(mPru30DeviceName, O_RDWR);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Open the port.
 
-   /*
-   * If the RPMsg channel doesn't exist yet the character device
-   * won't either.
-   * Make sure the PRU firmware is loaded and that the rpmsg_pru
-   * module is inserted.
-   */
-   if (mPru30Fd < 0) {
-      TS::print(0, "open error %d", mPru30Fd);
+   // Open the rpmsg_pru character device file.
+   mReadFd = open(mPru30DeviceName, O_RDWR);
+
+   if (mReadFd < 0) {
+      TS::print(0, "read open error %d", mReadFd);
       return;
    }
    else
    {
-      TS::print(0, "PruRxThread  opened");
+      TS::print(0, "read opened");
    }
 
-   /* Send 'hello world!' to the PRU through the RPMsg channel */
-   result = write(mPru30Fd, "hello world_0!", 13);
+   //***************************************************************************
+   //***************************************************************************
+   //**************************************************************************
+   // Open the port.
+
+   mEventFd = eventfd(0, EFD_SEMAPHORE);
+
+   if (mEventFd < 0)
+   {
+      TS::print(1, "ERROR101 %d", errno);
+      return;
+   }
+
+   //***************************************************************************
+   //***************************************************************************
+   //**************************************************************************
+   // Send first message.
+
+   result = write(mReadFd, "hello world_0!", 13);
    TS::print(0, "write      %d", result);
 }
 
@@ -94,7 +113,7 @@ void  PruRxThread::threadRunFunction()
    {
       if (BaseThreadWithTermFlag::mTerminateFlag) break;
 
-      tResult = read(mPru30Fd, tReadBuf, 512);
+      tResult = read(mReadFd, tReadBuf, 512);
       if (tResult > 0)
       {
          Prn::print(Prn::View11, "RxMessage %s",tReadBuf);
@@ -135,7 +154,7 @@ void PruRxThread::shutdownThread()
    BaseThreadWithTermFlag::mTerminateFlag = true;
 
    Prn::print(Prn::View11, "closing here");
-   close(mPru30Fd);
+   close(mReadFd);
 
    BaseThreadWithTermFlag::waitForThreadTerminate();
 }
