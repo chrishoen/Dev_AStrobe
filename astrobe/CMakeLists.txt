@@ -11,7 +11,6 @@ my_inc_import_RisLib(astrobe)
 
 my_lib_import_CommonLib(astrobe)
 my_lib_import_RisLib(astrobe)
-my_lib_import_PRULib(astrobe)
 
 return()
 

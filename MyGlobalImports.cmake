@@ -10,11 +10,9 @@ function(my_init_global_import_variables)
    elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "/usr/local/lib/libRisLib.a" PARENT_SCOPE)
-      set (MyPRULibImportPath  "/usr/lib/libprussdrv.a" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "C:/MyTools/MyLib/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "C:/MyTools/MyLib/lib/libRisLib.a" PARENT_SCOPE)
-      set (MyPRULibImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/libc/usr/lib/libprussdrv.a" PARENT_SCOPE)
    endif()
 endfunction()
 
@@ -49,19 +47,6 @@ endfunction()
 function(my_inc_import_RisLib _target)
 
    target_include_directories(${_target} PUBLIC ${MyRisLibIncludePath})
-
-endfunction()
-
-#*******************************************************************************
-#*******************************************************************************
-#*******************************************************************************
-
-function(my_lib_import_PRULib _target)
-
-   add_library(PRULib STATIC IMPORTED)
-   set_target_properties(PRULib PROPERTIES IMPORTED_LOCATION ${MyPRULibImportPath})
-
-   target_link_libraries(${_target} PRULib)
 
 endfunction()
 
