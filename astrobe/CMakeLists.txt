@@ -12,8 +12,6 @@ my_inc_import_RisLib(astrobe)
 my_lib_import_CommonLib(astrobe)
 my_lib_import_RisLib(astrobe)
 
-return()
-
 if (MSVC)
    install(TARGETS astrobe DESTINATION "C:\\aaa_aproc\\bin")
 elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)

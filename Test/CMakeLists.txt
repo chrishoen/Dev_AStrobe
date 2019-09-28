@@ -11,8 +11,6 @@ my_add_pch (Test)
 my_inc_import_RisLib(Test)
 my_lib_import_RisLib(Test)
 
-return()
-
 if (MSVC)
    install(TARGETS Test DESTINATION "C:\\aaa_aproc\\bin")
 elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
