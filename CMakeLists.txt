@@ -12,8 +12,12 @@ my_init_global_import_variables()
 
 my_special1()
 
+add_subdirectory ("Experiment")
+return()
+
 add_subdirectory ("CommonLib")
 add_subdirectory ("astrobe")
+add_subdirectory ("Experiment")
 add_subdirectory ("Test")
 return()
 
