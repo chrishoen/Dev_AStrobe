@@ -5,12 +5,14 @@ include(MyPrecompiledHeader.cmake)
 include(MyCodeMacros.cmake)
 include(MyGlobalImports.cmake)
 include(MyLocalImports.cmake)
-include(MySpecial.cmake)
+include(MyBoostImports.cmake)
 
 project ("Dev_AStrobe")
 my_init_global_import_variables()
+my_init_boost_import_variables()
 
-my_special1()
+add_subdirectory ("Experiment")
+return()
 
 add_subdirectory ("CommonLib")
 add_subdirectory ("astrobe")
