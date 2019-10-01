@@ -4,7 +4,10 @@
 
 function(my_init_global_import_variables)
 
-   if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
+   if(MSVC)
+      set (MyRisLibIncludePath "C:/MyTools/MyLib/include/RisLib" PARENT_SCOPE)
+      set (MyRisLibImportPath  "C:/MyTools/MyLib/lib/RisLib.lib" PARENT_SCOPE)
+   elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "/usr/local/lib/libRisLib.a" PARENT_SCOPE)
    else()
@@ -23,14 +26,19 @@ function(my_lib_import_RisLib _target)
 
    set_target_properties(RisLib PROPERTIES IMPORTED_LOCATION ${MyRisLibImportPath})
 
-   if (CMAKE_SYSTEM_VERSION EQUAL 101)
-      set (MyPThreadImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/lib/libpthread.so")
+   if (MSVC)
+      target_link_libraries(RisLib INTERFACE ws2_32)
+      target_link_libraries(RisLib INTERFACE winmm)
    else()
-      set (MyPThreadImportPath  "/usr/lib/arm-linux-gnueabihf/libpthread.so")
+      if (CMAKE_SYSTEM_VERSION EQUAL 101)
+         set (MyPThreadImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/lib/libpthread.so")
+      else()
+         set (MyPThreadImportPath  "/usr/lib/arm-linux-gnueabihf/libpthread.so")
+      endif()
+      add_library(PThreadLib SHARED IMPORTED)
+      set_target_properties(PThreadLib PROPERTIES IMPORTED_LOCATION ${MyPThreadImportPath})
+      target_link_libraries(RisLib INTERFACE PThreadLib)
    endif()
-   add_library(PThreadLib SHARED IMPORTED)
-   set_target_properties(PThreadLib PROPERTIES IMPORTED_LOCATION ${MyPThreadImportPath})
-   target_link_libraries(RisLib INTERFACE PThreadLib)
 
    target_link_libraries(${_target} RisLib)
    
