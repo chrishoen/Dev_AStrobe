@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <sqlite3.h>
 
 #include "CmdLineExec.h"
 
@@ -95,6 +96,12 @@ void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
+   using namespace std;
+   sqlite3* db;
+   char* szErrMsg = 0;
+
+   // open database
+   int rc = sqlite3_open("Sqlite_Test.db", &db);
 }
 
 //******************************************************************************
