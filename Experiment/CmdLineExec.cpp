@@ -1,12 +1,12 @@
 #include "stdafx.h"
 
 
-#include <boost/lambda/lambda.hpp>
+//#include <boost/lambda/lambda.hpp>
 #include <iostream>
 #include <iterator>
 #include <algorithm>
-#include <sqlite3.h>
-#include <filesystem>
+//#include <sqlite3.h>
+//#include <filesystem>
 
 #include "CmdLineExec.h"
 
@@ -52,11 +52,13 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+#if 0
    using namespace boost::lambda;
    typedef std::istream_iterator<int> in;
 
    std::for_each(
       in(std::cin), in(), std::cout << (_1 * 3) << " ");
+#endif
 }
 
 //******************************************************************************
@@ -80,7 +82,9 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
+#if 0
    std::filesystem::path tPath = "/usr/lib/sendmail.cf";
+#endif
 }
 
 //******************************************************************************
@@ -89,12 +93,14 @@ void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
+#if 0
    using namespace std;
    sqlite3* db;
    char* szErrMsg = 0;
 
    // open database
    int rc = sqlite3_open("Sqlite_Test.db", &db);
+#endif
 }
 
 //******************************************************************************
