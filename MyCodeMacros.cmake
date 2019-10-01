@@ -36,11 +36,10 @@ function(my_add_compile_options _target)
    #message(STATUS "CMAKE_CXX_FLAGS************************ " ${CMAKE_CXX_FLAGS})
    #message(STATUS "CMAKE_CXX_FLAGS_RELEASE**************** " ${CMAKE_CXX_FLAGS_RELEASE})
 
-   target_compile_options(${_target} PRIVATE "-std=c++11")
+   target_compile_options(${_target} PRIVATE "-std=c++17")
    target_compile_options(${_target} PRIVATE "-fexceptions")
    target_compile_options(${_target} PRIVATE "-O3")
    target_compile_options(${_target} PRIVATE "-fthreadsafe-statics")
-   target_compile_options(${_target} PRIVATE "-frtti")
    target_compile_options(${_target} PRIVATE "-fomit-frame-pointer")
 
    target_compile_options(${_target} PRIVATE "-w")
