@@ -10,9 +10,11 @@ my_add_pch (Experiment)
 
 my_inc_import_RisLib(Experiment)
 my_inc_import_boost(Experiment)
+my_inc_import_sqlite3(Experiment)
 
 my_lib_import_RisLib(Experiment)
 my_lib_import_boost(Experiment)
+my_lib_import_sqlite3(Experiment)
 
 if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
    install(TARGETS Experiment DESTINATION "/opt/aproc/bin")
