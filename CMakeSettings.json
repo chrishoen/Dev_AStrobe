@@ -11,6 +11,7 @@
          "cmakeCommandArgs": "",
          "buildCommandArgs": "-v -j4",
          "ctestCommandArgs": "",
+         "intelliSenseMode": "linux-gcc-arm",
          "cmakeToolchain": "MyBeagleToolchain.cmake",
          "variables": []
       }
