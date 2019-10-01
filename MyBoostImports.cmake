@@ -10,12 +10,14 @@ function(my_init_boost_import_variables)
       set (MyBoostThreadImportPath  "/usr/local/lib/libboost_thread.a" PARENT_SCOPE)
       set (MySQLite3IncludePath "/usr/include" PARENT_SCOPE)
       set (MySQLite3ImportPath "/usr/lib/arm-linux-gnueabihf/libsqlite3.so" PARENT_SCOPE)
+      set (MyStdFsImportPath "/usr/lib/gcc/arm-linux-gnueabihf/8/stdc++fs.a" PARENT_SCOPE)
    else()
       set (MyBoostIncludePath "C:/Beagle/boost/include" PARENT_SCOPE)
       set (MyBoostSystemImportPath  "C:/Beagle/boost/lib/libboost_system.a" PARENT_SCOPE)
       set (MyBoostThreadImportPath  "C:/Beagle/boost/lib/libboost_thread.a" PARENT_SCOPE)
       set (MySQLite3IncludePath "C:/Beagle/sqlite3/include" PARENT_SCOPE)
       set (MySQLite3ImportPath  "C:/Beagle/sqlite3/lib/libsqlite3.so" PARENT_SCOPE)
+      set (MyStdFsImportPath  "c:/Beagle/toolchain/arm-linux-gnueabihf/sysroot/usr/lib/gcc/arm-linux-gnueabihf/8/libstdc++fs.a" PARENT_SCOPE)
    endif()
 endfunction()
 
@@ -60,6 +62,20 @@ function(my_inc_import_sqlite3 _target)
 
    target_include_directories(${_target} PUBLIC ${MySQLite3IncludePath})
 
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_lib_import_stdfs _target)
+
+   add_library(stdc++fs STATIC IMPORTED)
+
+   set_target_properties(stdc++fs PROPERTIES IMPORTED_LOCATION ${MyStdFsImportPath})
+
+   target_link_libraries(${_target} stdc++fs)
+   
 endfunction()
 
 #*******************************************************************************

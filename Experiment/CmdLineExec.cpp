@@ -6,6 +6,7 @@
 #include <iterator>
 #include <algorithm>
 #include <sqlite3.h>
+#include <filesystem>
 
 #include "CmdLineExec.h"
 
@@ -79,15 +80,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   char tString[200];
-
-   while (true)
-   {
-      fgets(tString, 200, stdin);
-      printf("CMD %d %s", (int)strlen(tString), tString);
-      if (strcmp(tString, "e\n") == 0) break;
-   }
-
+   std::filesystem::path tPath = "/usr/lib/sendmail.cf";
 }
 
 //******************************************************************************
@@ -110,5 +103,13 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 {
+   char tString[200];
+
+   while (true)
+   {
+      fgets(tString, 200, stdin);
+      printf("CMD %d %s", (int)strlen(tString), tString);
+      if (strcmp(tString, "e\n") == 0) break;
+   }
 }
 
