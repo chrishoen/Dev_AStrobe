@@ -11,9 +11,7 @@ my_add_pch (Experiment)
 my_inc_import_RisLib(Experiment)
 my_lib_import_RisLib(Experiment)
 
-if (MSVC)
-   install(TARGETS Experiment DESTINATION "C:\\aaa_aproc\\bin")
-elseif(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
+if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
    install(TARGETS Experiment DESTINATION "/opt/aproc/bin")
 else()
    add_custom_command(
