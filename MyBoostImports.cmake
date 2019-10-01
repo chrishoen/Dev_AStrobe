@@ -11,7 +11,7 @@ function(my_init_boost_import_variables)
    else()
       set (MyBoostIncludePath "C:/Beagle/boost/include" PARENT_SCOPE)
       set (MyBoostSystemImportPath  "C:/Beagle/boost/lib/libboost_system.a" PARENT_SCOPE)
-      set (MyBoostThhreadImportPath  "C:/Beagle/boost/lib/libboost_thread.a" PARENT_SCOPE)
+      set (MyBoostThreadImportPath  "C:/Beagle/boost/lib/libboost_thread.a" PARENT_SCOPE)
    endif()
 endfunction()
 
