@@ -31,7 +31,7 @@ function(my_lib_import_RisLib _target)
       target_link_libraries(RisLib INTERFACE winmm)
    else()
       if (CMAKE_SYSTEM_VERSION EQUAL 101)
-         set (MyPThreadImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/libc/usr/lib/libpthread.so")
+         set (MyPThreadImportPath  "C:/Beagle/toolchain/arm-linux-gnueabihf/lib/libpthread.so")
       else()
          set (MyPThreadImportPath  "/usr/lib/arm-linux-gnueabihf/libpthread.so")
       endif()
@@ -50,3 +50,6 @@ function(my_inc_import_RisLib _target)
 
 endfunction()
 
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
