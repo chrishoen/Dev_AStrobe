@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 
-//#include <boost/lambda/lambda.hpp>
+#include <boost/lambda/lambda.hpp>
 #include <iostream>
 #include <iterator>
 #include <algorithm>
@@ -52,14 +52,11 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   std::vector<double> tVector;
-#if 0
    using namespace boost::lambda;
    typedef std::istream_iterator<int> in;
 
    std::for_each(
       in(std::cin), in(), std::cout << (_1 * 3) << " ");
-#endif
 }
 
 //******************************************************************************
