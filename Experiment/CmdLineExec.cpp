@@ -2,6 +2,9 @@
 
 
 #include <boost/lambda/lambda.hpp>
+#include <boost/intrusive_ptr.hpp>
+#include <boost/atomic.hpp>
+#include <atomic>
 #include <iostream>
 #include <iterator>
 #include <algorithm>
@@ -35,11 +38,13 @@ void CmdLineExec::reset()
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
    if(aCmd->isCmd("RESET"  ))  reset();
-   if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
-   if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3(aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4(aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5(aCmd);
+   if (aCmd->isCmd("GO1"))  executeGo1(aCmd);
+   if (aCmd->isCmd("GO2"))  executeGo2(aCmd);
+   if (aCmd->isCmd("GO3"))  executeGo3(aCmd);
+   if (aCmd->isCmd("GO4"))  executeGo4(aCmd);
+   if (aCmd->isCmd("GO5"))  executeGo5(aCmd);
+   if (aCmd->isCmd("GO6"))  executeGo6(aCmd);
+   if (aCmd->isCmd("GO7"))  executeGo7(aCmd);
 }
 
 //******************************************************************************
@@ -62,9 +67,16 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+std::atomic<int> mAtomicInt;
+std::atomic< int > m_CommandTries{ 0 };
+std::atomic< unsigned long long > m_CommandNumber{ 0 };
+std::atomic< unsigned long long > m_FailCommandNumber{ 0 };
+std::atomic< unsigned long long > m_RetryCommandNumber{ 0 };
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
+   mAtomicInt++;
+
    Ris::CmdLineCmd* tCmd = new Ris::CmdLineCmd("test1, 101, 102.9, data1", true);
 
    Prn::print(0, "numArg %10d", tCmd->numArg());
@@ -111,5 +123,42 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
       printf("CMD %d %s", (int)strlen(tString), tString);
       if (strcmp(tString, "e\n") == 0) break;
    }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+class X {
+public:
+   typedef boost::intrusive_ptr<X> pointer;
+   X() : refcount_(0) {}
+
+private:
+   mutable boost::atomic<int> refcount_;
+   friend void intrusive_ptr_add_ref(const X* x)
+   {
+      x->refcount_.fetch_add(1, boost::memory_order_relaxed);
+   }
+   friend void intrusive_ptr_release(const X* x)
+   {
+      if (x->refcount_.fetch_sub(1, boost::memory_order_release) == 1) {
+         boost::atomic_thread_fence(boost::memory_order_acquire);
+         delete x;
+      }
+   }
+};
+
+void CmdLineExec::executeGo6(Ris::CmdLineCmd* aCmd)
+{
+   X::pointer x = new X;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeGo7(Ris::CmdLineCmd* aCmd)
+{
 }
 
