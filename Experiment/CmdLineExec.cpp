@@ -6,7 +6,7 @@
 #include <iterator>
 #include <algorithm>
 #include <sqlite3.h>
-//#include <filesystem>
+#include <filesystem>
 
 #include "CmdLineExec.h"
 
@@ -83,9 +83,7 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-#if 0
    std::filesystem::path tPath = "/usr/lib/sendmail.cf";
-#endif
 }
 
 //******************************************************************************
