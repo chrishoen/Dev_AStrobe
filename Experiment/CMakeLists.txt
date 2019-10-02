@@ -17,6 +17,8 @@ my_lib_import_RisLib(Experiment)
 #my_lib_import_stdfs(Experiment)
 #my_lib_import_sqlite3(Experiment)
 
+return()
+
 if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
    install(TARGETS Experiment DESTINATION "/opt/aproc/bin")
 else()
