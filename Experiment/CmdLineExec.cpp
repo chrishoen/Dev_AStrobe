@@ -2,9 +2,9 @@
 
 
 //#include <boost/lambda/lambda.hpp>
-//#include <iostream>
-//#include <iterator>
-//#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <algorithm>
 //#include <sqlite3.h>
 //#include <filesystem>
 
@@ -52,6 +52,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
+   std::vector<double> tVector;
 #if 0
    using namespace boost::lambda;
    typedef std::istream_iterator<int> in;
