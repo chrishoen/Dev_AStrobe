@@ -11,7 +11,7 @@ project ("Dev_AStrobe")
 my_init_global_import_variables()
 my_init_boost_import_variables()
 
-add_subdirectory ("Test")
+add_subdirectory ("Experiment")
 return()
 
 add_subdirectory ("CommonLib")

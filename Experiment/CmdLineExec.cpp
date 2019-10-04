@@ -67,23 +67,13 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-std::atomic<int> mAtomicInt;
-std::atomic< int > m_CommandTries{ 0 };
-std::atomic< unsigned long long > m_CommandNumber{ 0 };
-std::atomic< unsigned long long > m_FailCommandNumber{ 0 };
-std::atomic< unsigned long long > m_RetryCommandNumber{ 0 };
+std::atomic< unsigned int > m_CommandNumber{ 101 };
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   mAtomicInt++;
+   m_CommandNumber++;
 
-   Ris::CmdLineCmd* tCmd = new Ris::CmdLineCmd("test1, 101, 102.9, data1", true);
-
-   Prn::print(0, "numArg %10d", tCmd->numArg());
-   Prn::print(0, "cmd    %10s", my_string_from_bool(tCmd->isCmd("test1")));
-   Prn::print(0, "arg1   %10d", tCmd->argInt(1));
-   Prn::print(0, "arg2   %10.4f", tCmd->argDouble(2));
-   Prn::print(0, "arg3   %10s", tCmd->argString(3));
+   Prn::print(0, "Go2 %lld", m_CommandNumber.load());
 }
 
 //******************************************************************************
