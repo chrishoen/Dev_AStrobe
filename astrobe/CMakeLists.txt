@@ -19,5 +19,5 @@ else()
       TARGET  astrobe
       POST_BUILD
       COMMAND rsync -azv --chmod=ugo=rwx astrobe rsync://debian@bbx/aproc/bin
-      WORKING_DIRECTORY C:/Users/choen/CMakeBuilds/Dev_AStrobe/astrobe)
+      WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_AStrobe/astrobe)
 endif()
