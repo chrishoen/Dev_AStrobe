@@ -196,7 +196,7 @@ void  PruRxThread::threadRunFunction()
       }
 
       TS::print(5, "prurx_read_pass %d",tRet);
-      Prn::print(Prn::View11, "RxMessage %u", tSeqNum);
+      Prn::print(Prn::View11, "PruRxThread RxMessage %u", tSeqNum);
 
       //***************************************************************************
       //***************************************************************************
