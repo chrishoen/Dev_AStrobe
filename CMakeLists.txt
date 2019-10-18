@@ -13,8 +13,6 @@ my_init_boost_import_variables()
 
 add_subdirectory ("CommonLib")
 add_subdirectory ("astrobe")
-add_subdirectory ("Experiment")
-add_subdirectory ("Test")
 return()
 
 add_subdirectory ("Test")
