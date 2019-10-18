@@ -45,7 +45,7 @@ void main_initialize(int argc,char** argv)
    TS::reset();
    TS::setProgramName("AStrobe");
    TS::setProgramLogFilepath("log/AStrobeLog.txt");
-   TS::setProgramPrintLevel(TS::PrintLevel(0, 3));
+   TS::setProgramPrintLevel(TS::PrintLevel(1, 3));
    TS::initialize();
 
    //***************************************************************************
@@ -70,6 +70,7 @@ void main_initialize(int argc,char** argv)
 
    // Initialize print.
    Prn::resetPrint();
+   Prn::setConsoleSettings(false,30);
    Prn::useConsole(1);
    Prn::initializePrint();
 
@@ -79,8 +80,11 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::ThreadRun2,  false);
    Prn::setFilter(Prn::ThreadRun3,  false);
    Prn::setFilter(Prn::ThreadRun4,  false);
-   Prn::setFilter(Prn::View11,      true, 1);
-   Prn::setFilter(Prn::View12,      false, 1);
+
+   Prn::setFilter(Prn::View11, true,  1);
+   Prn::setFilter(Prn::View12, false, 1);
+   Prn::setFilter(Prn::View13, false, 1);
+   Prn::setFilter(Prn::View14, false, 1);
 
    //***************************************************************************
    //***************************************************************************
