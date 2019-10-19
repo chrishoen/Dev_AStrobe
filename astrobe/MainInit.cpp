@@ -45,7 +45,7 @@ void main_initialize(int argc,char** argv)
    TS::reset();
    TS::setProgramName("AStrobe");
    TS::setProgramLogFilepath("log/AStrobeLog.txt");
-   TS::setProgramPrintLevel(TS::PrintLevel(1, 3));
+   TS::setProgramPrintLevel(TS::PrintLevel(0, 3));
    TS::initialize();
 
    //***************************************************************************
@@ -70,8 +70,8 @@ void main_initialize(int argc,char** argv)
 
    // Initialize print.
    Prn::resetPrint();
-   Prn::setConsoleSettings(false,30);
    Prn::useConsole(1);
+   Prn::testNetwork();
    Prn::initializePrint();
 
    // Initialize print filters.
