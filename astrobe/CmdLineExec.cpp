@@ -6,6 +6,8 @@
 
 #include "risThreadsThreads.h"
 #include "risTimeMarker.h"
+#include "risSystemCalls.h"
+#include "risNetWait.h"
 
 #include "axStrobeThread.h"
 #include "axStrobeParms.h"
@@ -37,7 +39,29 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("GO1"))    executeGo1(aCmd);
    if (aCmd->isCmd("GO2"))    executeGo2(aCmd);
    if (aCmd->isCmd("GO3"))    executeGo3(aCmd);
+   if (aCmd->isCmd("TN1"))    executeTN1(aCmd);
+   if (aCmd->isCmd("TN2"))    executeTN2(aCmd);
    if (aCmd->isCmd("Parms"))  executeParms(aCmd);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeTN1(Ris::CmdLineCmd* aCmd)
+{
+   int tRet = Ris::doSystemCommand("ping -c 1 72.217.10.100");
+   Prn::print(0, "tRet %d", tRet);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeTN2(Ris::CmdLineCmd* aCmd)
+{
+   bool tRet = Ris::Net::doWaitForNetwork();
+   Prn::print(0, "tRet %s", my_string_from_bool(tRet));
 }
 
 //******************************************************************************

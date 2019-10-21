@@ -4,6 +4,7 @@
 
 #include "risBaseDir.h"
 #include "risPortableCalls.h"
+#include "risNetWait.h"
 #include "axStrobeParms.h"
 #include "pruShare.h"
 
@@ -62,6 +63,13 @@ void main_initialize(int argc,char** argv)
 
    // Initialize pru shared memory.
    initializePruShare();
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Wait for the network.
+
+   Ris::Net::doWaitForNetwork();
 
    //***************************************************************************
    //***************************************************************************
