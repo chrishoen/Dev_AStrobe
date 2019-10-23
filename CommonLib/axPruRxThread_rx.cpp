@@ -7,6 +7,7 @@
 
 #include "stdafx.h"
 
+#include "pruShare.h"
 #include "axPruRxThread.h"
 
 namespace AX
@@ -19,7 +20,9 @@ namespace AX
 
 void PruRxThread::doProcessRxFrame(int aSeqNum)
 {
-   Prn::print(Prn::View11, "PruRxThread RxMessage %u", aSeqNum);
+   Prn::print(Prn::View11, "PruRxThread RxMessage %5u %1d",
+      aSeqNum,
+      gPruShare->mMSFrameSelect);
 }
 
 //******************************************************************************
