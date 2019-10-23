@@ -107,7 +107,7 @@ void PruRxThread::threadInitFunction()
 // thread processing. Execute a while loop that does read calls.
 // The loop exits when the thread is canceled.
 
-void  PruRxThread::threadRunFunction()
+void PruRxThread::threadRunFunction()
 {
    // Guard.
    if (!mValidFlag) return;
@@ -196,7 +196,7 @@ void  PruRxThread::threadRunFunction()
       }
 
       TS::print(5, "prurx_read_pass %d",tRet);
-      Prn::print(Prn::View11, "PruRxThread RxMessage %u", tSeqNum);
+      doProcessRxFrame(tSeqNum);
 
       //***************************************************************************
       //***************************************************************************

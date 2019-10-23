@@ -79,6 +79,14 @@ public:
    // thread. Set the termination flag, close the socket and wait for the
    // thread to terminate.
    void shutdownThread() override; 
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods:
+
+   // Process received frame message.
+   void doProcessRxFrame(int aSeqNum);
 };
 
 //******************************************************************************
