@@ -25,8 +25,7 @@ namespace AX
 //******************************************************************************
 
 StrobeThread::StrobeThread()
-// : mOutGPIO(60)
-   : mOutGPIO(115)
+   : mOutGPIO(48)
 {
    // Set base class variables.
    BaseClass::setThreadName("Strobe");
