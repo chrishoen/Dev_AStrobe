@@ -20,11 +20,11 @@ my_lib_import_sqlite3(Experiment)
 return()
 
 if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
-   install(TARGETS Experiment DESTINATION "/opt/aproc/bin")
+   install(TARGETS Experiment DESTINATION "/opt/prime/bin")
 else()
    add_custom_command(
       TARGET  Experiment
       POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx Experiment rsync://debian@bbx/aproc/bin
+      COMMAND rsync -azv --chmod=ugo=rwx Experiment rsync://debian@bbx/prime/bin
       WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_AStrobe/Experiment)
 endif()

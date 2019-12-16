@@ -25,7 +25,7 @@ void main_initialize(int argc,char** argv)
    // Set program directory.
 
    // Set the base directory global variable to the cproc directory path.
-   Ris::setBaseDirectory("/opt/aproc");
+   Ris::setBaseDirectory("/opt/prime");
 
    // Set the program working directory to the cproc directory path.
    Ris::chdirToBaseDirectory();

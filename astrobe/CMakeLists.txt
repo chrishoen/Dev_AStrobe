@@ -13,11 +13,11 @@ my_lib_import_CommonLib(astrobe)
 my_lib_import_RisLib(astrobe)
 
 if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
-   install(TARGETS astrobe DESTINATION "/opt/aproc/bin")
+   install(TARGETS astrobe DESTINATION "/opt/prime/bin")
 else()
    add_custom_command(
       TARGET  astrobe
       POST_BUILD
-      COMMAND rsync -azv --chmod=ugo=rwx astrobe rsync://debian@bbx/aproc/bin
+      COMMAND rsync -azv --chmod=ugo=rwx astrobe rsync://debian@bbx/prime/bin
       WORKING_DIRECTORY C:/Users/$ENV{username}/CMakeBuilds/Dev_AStrobe/astrobe)
 endif()
