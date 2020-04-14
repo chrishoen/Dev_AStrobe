@@ -12,6 +12,9 @@ my_inc_import_RisLib(astrobe)
 my_lib_import_CommonLib(astrobe)
 my_lib_import_RisLib(astrobe)
 
+target_link_options(astrobe PUBLIC "-lpthread")
+
+
 if(NOT CMAKE_SYSTEM_VERSION EQUAL 101)
    install(TARGETS astrobe DESTINATION "/opt/prime/bin")
 else()
